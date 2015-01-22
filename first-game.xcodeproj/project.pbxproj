@@ -15,6 +15,9 @@
 		B5315F851A6E8A6F00BAF87E /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B5315F841A6E8A6F00BAF87E /* Images.xcassets */; };
 		B5315F881A6E8A6F00BAF87E /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = B5315F861A6E8A6F00BAF87E /* LaunchScreen.xib */; };
 		B5315F941A6E8A6F00BAF87E /* first_gameTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5315F931A6E8A6F00BAF87E /* first_gameTests.swift */; };
+		B5315F9E1A6E902E00BAF87E /* Helicopter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5315F9D1A6E902E00BAF87E /* Helicopter.swift */; };
+		B5315FA01A6FB8D500BAF87E /* bgMusic.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = B5315F9F1A6FB8D500BAF87E /* bgMusic.mp3 */; };
+		B5315FA21A6FBD9A00BAF87E /* bamboo.jpg in Resources */ = {isa = PBXBuildFile; fileRef = B5315FA11A6FBD9A00BAF87E /* bamboo.jpg */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -40,6 +43,9 @@
 		B5315F8D1A6E8A6F00BAF87E /* first-gameTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "first-gameTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		B5315F921A6E8A6F00BAF87E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B5315F931A6E8A6F00BAF87E /* first_gameTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = first_gameTests.swift; sourceTree = "<group>"; };
+		B5315F9D1A6E902E00BAF87E /* Helicopter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Helicopter.swift; sourceTree = "<group>"; };
+		B5315F9F1A6FB8D500BAF87E /* bgMusic.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = bgMusic.mp3; sourceTree = "<group>"; };
+		B5315FA11A6FBD9A00BAF87E /* bamboo.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = bamboo.jpg; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -81,9 +87,12 @@
 		B5315F761A6E8A6E00BAF87E /* first-game */ = {
 			isa = PBXGroup;
 			children = (
+				B5315FA11A6FBD9A00BAF87E /* bamboo.jpg */,
+				B5315F9F1A6FB8D500BAF87E /* bgMusic.mp3 */,
 				B5315F791A6E8A6E00BAF87E /* AppDelegate.swift */,
 				B5315F7B1A6E8A6E00BAF87E /* GameScene.sks */,
 				B5315F7D1A6E8A6F00BAF87E /* GameScene.swift */,
+				B5315F9D1A6E902E00BAF87E /* Helicopter.swift */,
 				B5315F7F1A6E8A6F00BAF87E /* GameViewController.swift */,
 				B5315F811A6E8A6F00BAF87E /* Main.storyboard */,
 				B5315F841A6E8A6F00BAF87E /* Images.xcassets */,
@@ -200,6 +209,8 @@
 			files = (
 				B5315F881A6E8A6F00BAF87E /* LaunchScreen.xib in Resources */,
 				B5315F851A6E8A6F00BAF87E /* Images.xcassets in Resources */,
+				B5315FA01A6FB8D500BAF87E /* bgMusic.mp3 in Resources */,
+				B5315FA21A6FBD9A00BAF87E /* bamboo.jpg in Resources */,
 				B5315F7C1A6E8A6E00BAF87E /* GameScene.sks in Resources */,
 				B5315F831A6E8A6F00BAF87E /* Main.storyboard in Resources */,
 			);
@@ -222,6 +233,7 @@
 				B5315F7E1A6E8A6F00BAF87E /* GameScene.swift in Sources */,
 				B5315F801A6E8A6F00BAF87E /* GameViewController.swift in Sources */,
 				B5315F7A1A6E8A6E00BAF87E /* AppDelegate.swift in Sources */,
+				B5315F9E1A6E902E00BAF87E /* Helicopter.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
