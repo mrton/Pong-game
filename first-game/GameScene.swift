@@ -103,7 +103,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         paddle1.physicsBody?.categoryBitMask = paddleCategory1
         paddle2.physicsBody?.categoryBitMask = paddleCategory2
         
-        ball.physicsBody?.contactTestBitMask = bottomCategory
+        top.physicsBody?.contactTestBitMask = ballCategory
+        bottom.physicsBody?.contactTestBitMask = ballCategory
+        
         
         
         //--------MOVING PADDLE AROUND-------------
@@ -176,7 +178,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         if firstBody.categoryBitMask == ballCategory && secondBody.categoryBitMask == bottomCategory {
             println("player 1 lose!")
+        } else if firstBody.categoryBitMask == ballCategory && secondBody.categoryBitMask == topCategory {
+            println("player 2 lose!!!")
         }
+
     }
     
     required init?(coder aDecoder: NSCoder) {
