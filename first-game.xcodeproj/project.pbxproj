@@ -18,6 +18,7 @@
 		B5315F9E1A6E902E00BAF87E /* Helicopter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5315F9D1A6E902E00BAF87E /* Helicopter.swift */; };
 		B5315FA01A6FB8D500BAF87E /* bgMusic.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = B5315F9F1A6FB8D500BAF87E /* bgMusic.mp3 */; };
 		B5315FA21A6FBD9A00BAF87E /* bamboo.jpg in Resources */ = {isa = PBXBuildFile; fileRef = B5315FA11A6FBD9A00BAF87E /* bamboo.jpg */; };
+		B5315FA41A715BE200BAF87E /* Super Bell Hill (SM 3D World) - Super Smash Bros. Wii U.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = B5315FA31A715BE200BAF87E /* Super Bell Hill (SM 3D World) - Super Smash Bros. Wii U.mp3 */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -46,6 +47,7 @@
 		B5315F9D1A6E902E00BAF87E /* Helicopter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Helicopter.swift; sourceTree = "<group>"; };
 		B5315F9F1A6FB8D500BAF87E /* bgMusic.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = bgMusic.mp3; sourceTree = "<group>"; };
 		B5315FA11A6FBD9A00BAF87E /* bamboo.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = bamboo.jpg; sourceTree = "<group>"; };
+		B5315FA31A715BE200BAF87E /* Super Bell Hill (SM 3D World) - Super Smash Bros. Wii U.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Super Bell Hill (SM 3D World) - Super Smash Bros. Wii U.mp3"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -87,6 +89,7 @@
 		B5315F761A6E8A6E00BAF87E /* first-game */ = {
 			isa = PBXGroup;
 			children = (
+				B5315FA31A715BE200BAF87E /* Super Bell Hill (SM 3D World) - Super Smash Bros. Wii U.mp3 */,
 				B5315FA11A6FBD9A00BAF87E /* bamboo.jpg */,
 				B5315F9F1A6FB8D500BAF87E /* bgMusic.mp3 */,
 				B5315F791A6E8A6E00BAF87E /* AppDelegate.swift */,
@@ -212,6 +215,7 @@
 				B5315FA01A6FB8D500BAF87E /* bgMusic.mp3 in Resources */,
 				B5315FA21A6FBD9A00BAF87E /* bamboo.jpg in Resources */,
 				B5315F7C1A6E8A6E00BAF87E /* GameScene.sks in Resources */,
+				B5315FA41A715BE200BAF87E /* Super Bell Hill (SM 3D World) - Super Smash Bros. Wii U.mp3 in Resources */,
 				B5315F831A6E8A6F00BAF87E /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
