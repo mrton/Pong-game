@@ -9,19 +9,21 @@
 import SpriteKit
 import AVFoundation
 
-class GameScene: SKScene, SKPhysicsContactDelegate {
+
+class GameScene: SKScene, SKPhysicsContactDelegate{
     
     var fingerIsOnPaddle1 = false
-    var fingerIsOnPaddle2 = false    
+    var fingerIsOnPaddle2 = false
+    var scores: [Int] = [0,0]
+    var updates = 0
+    
     let ballCategoryName = "ball"
     let paddleCategoryName1 = "paddle1"
     let paddleCategoryName2 = "paddle2"
-    //let brickCategoryName = "brick"
-    
     
     let backgroundMusicPlayer = AVAudioPlayer()
     
-    // bitmasks
+    // bitmasks for collision detection
     
     let ballCategory:UInt32 = 0x1 << 0
     let bottomCategory:UInt32 = 0x1 << 1
@@ -46,11 +48,12 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         backgroundImage.position = CGPointMake(self.frame.size.width / 2, self.frame.size.height / 2)
         self.addChild(backgroundImage)
         
-        
+        //frame
         self.physicsWorld.gravity = CGVectorMake(0,0)
         let worldBorder = SKPhysicsBody(edgeLoopFromRect: self.frame)
         self.physicsBody = worldBorder
         self.physicsBody?.friction = 0
+
         
         //-----------------BALL--------------------
     
@@ -59,6 +62,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         ball.position = CGPointMake(self.frame.size.width/4, self.frame.size.height/4)
         self.addChild(ball)
         
+        
         ball.physicsBody = SKPhysicsBody(circleOfRadius: ball.frame.size.width/4)
         ball.physicsBody?.friction = 0
         ball.physicsBody?.restitution = 1
@@ -66,7 +70,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         ball.physicsBody?.allowsRotation = false
         ball.physicsBody?.applyImpulse(CGVectorMake(0.5, -0.5))
         
-        //----------------PADDLE1-------------------
+        //----------------PADDLES-------------------
         
         let paddle1 = SKSpriteNode(imageNamed: "paddle")
         let paddle2 = SKSpriteNode(imageNamed: "paddle")
@@ -105,11 +109,13 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         top.physicsBody?.contactTestBitMask = ballCategory
         bottom.physicsBody?.contactTestBitMask = ballCategory
-        
+
         
         
         //--------MOVING PADDLE AROUND-------------
     }
+    
+    
     
     override func touchesBegan(touches: NSSet, withEvent event: UIEvent) {
         let touch = touches.anyObject() as UITouch
@@ -165,24 +171,81 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     //----------CONTACT---------------
     
     func didBeginContact(contact: SKPhysicsContact) {
+        let respawnPos = CGPointMake(self.frame.size.width/2, self.frame.size.height/2)
+        let update = 1
         var firstBody = SKPhysicsBody()
         var secondBody = SKPhysicsBody()
         
         if contact.bodyA.categoryBitMask < contact.bodyB.categoryBitMask {
             firstBody = contact.bodyA
             secondBody = contact.bodyB
+            updates += 1
+            
         } else {
             firstBody = contact.bodyB
             secondBody = contact.bodyA
+            updates += 1
         }
         
-        if firstBody.categoryBitMask == ballCategory && secondBody.categoryBitMask == bottomCategory {
-            println("player 1 lose!")
-        } else if firstBody.categoryBitMask == ballCategory && secondBody.categoryBitMask == topCategory {
-            println("player 2 lose!!!")
-        }
+        if firstBody.categoryBitMask == ballCategory && secondBody.categoryBitMask == bottomCategory{
+            if update == updates{
+                scores[1] += 1
+                firstBody.velocity = CGVectorMake(0.0, 0.0)
+                firstBody.node?.runAction(SKAction.moveTo(respawnPos, duration: 0.0))
+                delay(2.0) {
+                    firstBody.velocity = CGVectorMake(0.0, 0.0)
+                    firstBody.applyImpulse(CGVectorMake(-0.5, 0.5))
+                }
+                
+            } else {
+                updates-=2
+                firstBody.velocity = CGVectorMake(0.0, 0.0)
+                firstBody.node?.runAction(SKAction.moveTo(respawnPos, duration: 0.0))
+                
+                delay(2.0) {
+                    firstBody.velocity = CGVectorMake(0.0, 0.0)
+                    firstBody.applyImpulse(CGVectorMake(-0.5, 0.5))
+                }
+            }
 
+        } else if firstBody.categoryBitMask == ballCategory && secondBody.categoryBitMask == topCategory {
+            if update == updates{
+                scores[0] += 1
+                firstBody.velocity = CGVectorMake(0.0, 0.0)
+                firstBody.node?.runAction(SKAction.moveTo(respawnPos, duration: 0.0))
+                delay(2.0) {
+                    firstBody.velocity = CGVectorMake(0.0, 0.0)
+                    firstBody.applyImpulse(CGVectorMake(0.5, -0.5))
+                }
+                    
+            } else {
+                scores[0] += 1
+                updates-=2
+                firstBody.velocity = CGVectorMake(0.0, 0.0)
+                firstBody.node?.runAction(SKAction.moveTo(respawnPos, duration: 0.0))
+                
+                delay(2.0) {
+                    firstBody.velocity = CGVectorMake(0.0, 0.0)
+                    firstBody.applyImpulse(CGVectorMake(0.5, -0.5))
+                }
+            }
+            
+        }
     }
+    
+    
+    //-----------HELPER FUNCTIONS---------
+    
+    func delay(delay:Double, closure:()->()) {
+        dispatch_after(
+            dispatch_time(
+                DISPATCH_TIME_NOW,
+                Int64(delay * Double(NSEC_PER_SEC))
+            ),
+            dispatch_get_main_queue(), closure)
+    }
+
+    
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder:aDecoder)

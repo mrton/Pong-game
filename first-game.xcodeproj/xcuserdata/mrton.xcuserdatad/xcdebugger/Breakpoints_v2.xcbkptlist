@@ -10,13 +10,59 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "first-game/GameScene.swift"
-            timestampString = "443716923.84311"
+            timestampString = "444225247.595238"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "50"
-            endingLineNumber = "50"
+            startingLineNumber = "52"
+            endingLineNumber = "52"
             landmarkName = "init(size:)"
             landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "first-game/GameScene.swift"
+            timestampString = "444080805.290785"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "13"
+            endingLineNumber = "13"
+            landmarkName = "GameScene"
+            landmarkType = "3">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "@objc first_game.GameScene.__ivar_destroyer"
+                  moduleName = "first-game"
+                  urlString = "file:///Users/mrton/Development/Apps/iPhone%20Apps/first-game/first-game/GameScene.swift"
+                  timestampString = "444167729.028668"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "13"
+                  endingLineNumber = "13"
+                  offsetFromSymbolStart = "15">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "first_game.GameScene.init (first_game.GameScene.Type)() -&gt; first_game.GameScene"
+                  moduleName = "first-game"
+                  urlString = "file:///Users/mrton/Development/Apps/iPhone%20Apps/first-game/first-game/GameScene.swift"
+                  timestampString = "444167729.028912"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "13"
+                  endingLineNumber = "13"
+                  offsetFromSymbolStart = "12">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>
