@@ -22,6 +22,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate{
     let paddleCategoryName2 = "paddle2"
     
     let backgroundMusicPlayer = AVAudioPlayer()
+    let scoreText = SKLabelNode(fontNamed: "Chalkduster" )
     
     // bitmasks for collision detection
     
@@ -44,7 +45,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate{
         backgroundMusicPlayer.play()
         
         //background image
-        let backgroundImage = SKSpriteNode(imageNamed: "bamboo")
+        let backgroundImage = SKSpriteNode(imageNamed: "space")
         backgroundImage.position = CGPointMake(self.frame.size.width / 2, self.frame.size.height / 2)
         self.addChild(backgroundImage)
         
@@ -53,6 +54,13 @@ class GameScene: SKScene, SKPhysicsContactDelegate{
         let worldBorder = SKPhysicsBody(edgeLoopFromRect: self.frame)
         self.physicsBody = worldBorder
         self.physicsBody?.friction = 0
+        
+        //---------------scoretext-----------------
+        
+        self.scoreText.text = "0-0"
+        self.scoreText.fontSize = 30
+        self.scoreText.position = CGPointMake(self.frame.size.width - self.frame.size.width/8, self.frame.size.height - self.frame.size.height/8)
+        self.addChild(scoreText)
 
         
         //-----------------BALL--------------------
@@ -190,43 +198,69 @@ class GameScene: SKScene, SKPhysicsContactDelegate{
         if firstBody.categoryBitMask == ballCategory && secondBody.categoryBitMask == bottomCategory{
             if update == updates{
                 scores[1] += 1
-                firstBody.velocity = CGVectorMake(0.0, 0.0)
-                firstBody.node?.runAction(SKAction.moveTo(respawnPos, duration: 0.0))
-                delay(2.0) {
+                scoreText.text = createScore(scores)
+                if checkIfWon(scores[1]) {
+                    let WinScene = GameOverScene(size: self.frame.size, player1Won: false, player2Won: true)
+                    self.view?.presentScene(WinScene)
+                } else {
                     firstBody.velocity = CGVectorMake(0.0, 0.0)
-                    firstBody.applyImpulse(CGVectorMake(-0.5, 0.5))
+                    firstBody.node?.runAction(SKAction.moveTo(respawnPos, duration: 0.0))
+                    delay(2.0) {
+                        firstBody.velocity = CGVectorMake(0.0, 0.0)
+                        firstBody.applyImpulse(CGVectorMake(-0.5, 0.5))
+                    }
                 }
                 
             } else {
                 updates-=2
-                firstBody.velocity = CGVectorMake(0.0, 0.0)
-                firstBody.node?.runAction(SKAction.moveTo(respawnPos, duration: 0.0))
-                
-                delay(2.0) {
+                scoreText.text = createScore(scores)
+                if checkIfWon(scores[1]) {
+                    let WinScene = GameOverScene(size: self.frame.size, player1Won: false, player2Won: true)
+                    self.view?.presentScene(WinScene)
+                } else {
                     firstBody.velocity = CGVectorMake(0.0, 0.0)
-                    firstBody.applyImpulse(CGVectorMake(-0.5, 0.5))
+                    firstBody.node?.runAction(SKAction.moveTo(respawnPos, duration: 0.0))
+                    
+                    
+                    delay(2.0) {
+                        firstBody.velocity = CGVectorMake(0.0, 0.0)
+                        firstBody.applyImpulse(CGVectorMake(-0.5, 0.5))
+                    }
                 }
             }
 
         } else if firstBody.categoryBitMask == ballCategory && secondBody.categoryBitMask == topCategory {
             if update == updates{
                 scores[0] += 1
-                firstBody.velocity = CGVectorMake(0.0, 0.0)
-                firstBody.node?.runAction(SKAction.moveTo(respawnPos, duration: 0.0))
-                delay(2.0) {
+                scoreText.text = createScore(scores)
+                if checkIfWon(scores[0]) {
+                    let WinScene = GameOverScene(size: self.frame.size, player1Won: true, player2Won: false)
+                    self.view?.presentScene(WinScene)
+                } else {
                     firstBody.velocity = CGVectorMake(0.0, 0.0)
-                    firstBody.applyImpulse(CGVectorMake(0.5, -0.5))
+                    firstBody.node?.runAction(SKAction.moveTo(respawnPos, duration: 0.0))
+                    delay(2.0) {
+                        firstBody.velocity = CGVectorMake(0.0, 0.0)
+                        firstBody.applyImpulse(CGVectorMake(0.5, -0.5))
+                    }
                 }
+                
                     
             } else {
                 scores[0] += 1
-                updates-=2
-                firstBody.velocity = CGVectorMake(0.0, 0.0)
-                firstBody.node?.runAction(SKAction.moveTo(respawnPos, duration: 0.0))
-                
-                delay(2.0) {
+                scoreText.text = createScore(scores)
+                if checkIfWon(scores[0]) {
+                    let WinScene = GameOverScene(size: self.frame.size, player1Won: true, player2Won: false)
+                    self.view?.presentScene(WinScene)
+                } else {
+                    updates-=2
                     firstBody.velocity = CGVectorMake(0.0, 0.0)
-                    firstBody.applyImpulse(CGVectorMake(0.5, -0.5))
+                    firstBody.node?.runAction(SKAction.moveTo(respawnPos, duration: 0.0))
+                    
+                    delay(2.0) {
+                        firstBody.velocity = CGVectorMake(0.0, 0.0)
+                        firstBody.applyImpulse(CGVectorMake(0.5, -0.5))
+                    }
                 }
             }
             
@@ -235,6 +269,22 @@ class GameScene: SKScene, SKPhysicsContactDelegate{
     
     
     //-----------HELPER FUNCTIONS---------
+    func createScore(score: [Int])-> String{
+        var player1 = score[0]
+        var player2 = score[1]
+        return "\(player1)-\(player2)"
+    }
+    
+    func checkIfWon(score: Int)->Bool{
+        if score == 2{
+            return true
+        }
+        return false
+    }
+    
+    func Winner(score: [Int]){
+        
+    }
     
     func delay(delay:Double, closure:()->()) {
         dispatch_after(

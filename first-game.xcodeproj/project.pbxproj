@@ -19,6 +19,8 @@
 		B5315FA01A6FB8D500BAF87E /* bgMusic.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = B5315F9F1A6FB8D500BAF87E /* bgMusic.mp3 */; };
 		B5315FA21A6FBD9A00BAF87E /* bamboo.jpg in Resources */ = {isa = PBXBuildFile; fileRef = B5315FA11A6FBD9A00BAF87E /* bamboo.jpg */; };
 		B5315FA41A715BE200BAF87E /* Super Bell Hill (SM 3D World) - Super Smash Bros. Wii U.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = B5315FA31A715BE200BAF87E /* Super Bell Hill (SM 3D World) - Super Smash Bros. Wii U.mp3 */; };
+		B58D9EB51A7A7C78008BD148 /* Space Galaxy.jpg in Resources */ = {isa = PBXBuildFile; fileRef = B58D9EB41A7A7C78008BD148 /* Space Galaxy.jpg */; };
+		B58D9EB71A7A8C54008BD148 /* GameOverScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = B58D9EB61A7A8C54008BD148 /* GameOverScene.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -48,6 +50,8 @@
 		B5315F9F1A6FB8D500BAF87E /* bgMusic.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = bgMusic.mp3; sourceTree = "<group>"; };
 		B5315FA11A6FBD9A00BAF87E /* bamboo.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = bamboo.jpg; sourceTree = "<group>"; };
 		B5315FA31A715BE200BAF87E /* Super Bell Hill (SM 3D World) - Super Smash Bros. Wii U.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Super Bell Hill (SM 3D World) - Super Smash Bros. Wii U.mp3"; sourceTree = "<group>"; };
+		B58D9EB41A7A7C78008BD148 /* Space Galaxy.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "Space Galaxy.jpg"; sourceTree = "<group>"; };
+		B58D9EB61A7A8C54008BD148 /* GameOverScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameOverScene.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -90,11 +94,13 @@
 			isa = PBXGroup;
 			children = (
 				B5315FA31A715BE200BAF87E /* Super Bell Hill (SM 3D World) - Super Smash Bros. Wii U.mp3 */,
+				B58D9EB41A7A7C78008BD148 /* Space Galaxy.jpg */,
 				B5315FA11A6FBD9A00BAF87E /* bamboo.jpg */,
 				B5315F9F1A6FB8D500BAF87E /* bgMusic.mp3 */,
 				B5315F791A6E8A6E00BAF87E /* AppDelegate.swift */,
 				B5315F7B1A6E8A6E00BAF87E /* GameScene.sks */,
 				B5315F7D1A6E8A6F00BAF87E /* GameScene.swift */,
+				B58D9EB61A7A8C54008BD148 /* GameOverScene.swift */,
 				B5315F9D1A6E902E00BAF87E /* Helicopter.swift */,
 				B5315F7F1A6E8A6F00BAF87E /* GameViewController.swift */,
 				B5315F811A6E8A6F00BAF87E /* Main.storyboard */,
@@ -211,6 +217,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B5315F881A6E8A6F00BAF87E /* LaunchScreen.xib in Resources */,
+				B58D9EB51A7A7C78008BD148 /* Space Galaxy.jpg in Resources */,
 				B5315F851A6E8A6F00BAF87E /* Images.xcassets in Resources */,
 				B5315FA01A6FB8D500BAF87E /* bgMusic.mp3 in Resources */,
 				B5315FA21A6FBD9A00BAF87E /* bamboo.jpg in Resources */,
@@ -234,6 +241,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B58D9EB71A7A8C54008BD148 /* GameOverScene.swift in Sources */,
 				B5315F7E1A6E8A6F00BAF87E /* GameScene.swift in Sources */,
 				B5315F801A6E8A6F00BAF87E /* GameViewController.swift in Sources */,
 				B5315F7A1A6E8A6E00BAF87E /* AppDelegate.swift in Sources */,
@@ -431,6 +439,7 @@
 				B5315F991A6E8A6F00BAF87E /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		B5315F9A1A6E8A6F00BAF87E /* Build configuration list for PBXNativeTarget "first-gameTests" */ = {
 			isa = XCConfigurationList;
@@ -439,6 +448,7 @@
 				B5315F9C1A6E8A6F00BAF87E /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
