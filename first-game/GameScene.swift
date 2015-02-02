@@ -16,7 +16,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate{
     var fingerIsOnPaddle2 = false
     var scores: [Int] = [0,0]
     var updates = 0
-    let timeBeforeSpeed = NSTimeInterval(10)
+    var counts = 0
     
     let ballCategoryName = "ball"
     let paddleCategoryName1 = "paddle1"
@@ -24,6 +24,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate{
     
     let backgroundMusicPlayer = AVAudioPlayer()
     let scoreText = SKLabelNode(fontNamed: "Chalkduster" )
+    let hitsText = SKLabelNode(fontNamed: "Chalkduster")
     
     // bitmasks for collision detection
     
@@ -64,6 +65,13 @@ class GameScene: SKScene, SKPhysicsContactDelegate{
         self.scoreText.fontSize = 30
         self.scoreText.position = CGPointMake(self.frame.size.width - self.frame.size.width/8, self.frame.size.height - self.frame.size.height/8)
         self.addChild(scoreText)
+        
+        //-----------------hit-text-----------------
+        
+        self.hitsText.text = "hits: 0"
+        self.hitsText.fontSize = 30
+        self.hitsText.position = CGPointMake(self.frame.size.width/6 , self.frame.size.height - self.frame.size.height/8)
+        self.addChild(hitsText)
 
         
         //-----------------BALL--------------------
@@ -120,6 +128,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate{
         
         top.physicsBody?.contactTestBitMask = ballCategory
         bottom.physicsBody?.contactTestBitMask = ballCategory
+        paddle1.physicsBody?.contactTestBitMask = ballCategory
+        paddle2.physicsBody?.contactTestBitMask = ballCategory
         
     }
         //--------MOVING PADDLE AROUND-------------
@@ -205,6 +215,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate{
         }
         
         if firstBody.categoryBitMask == ballCategory && secondBody.categoryBitMask == bottomCategory{
+            self.counts = 0
+            hitsText.text = createHits(self.counts)
             if update == updates{
                 scores[1] += 1
                 scoreText.text = createScore(scores)
@@ -217,8 +229,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate{
                     delay(2.0) {
                         firstBody.velocity = CGVectorMake(0.0, 0.0)
                         firstBody.applyImpulse(CGVectorMake(-0.5, 0.5))
-                        println(firstBody.velocity.dx)
-                        println(firstBody.velocity.dy)
                     }
                 }
                 
@@ -241,6 +251,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate{
             }
 
         } else if firstBody.categoryBitMask == ballCategory && secondBody.categoryBitMask == topCategory {
+            self.counts = 0
+            hitsText.text = createHits(self.counts)
             if update == updates{
                 scores[0] += 1
                 scoreText.text = createScore(scores)
@@ -277,6 +289,48 @@ class GameScene: SKScene, SKPhysicsContactDelegate{
                 }
             }
             
+        } else if firstBody.categoryBitMask == ballCategory && secondBody.categoryBitMask == paddleCategory1 {
+            self.counts += 1
+            hitsText.text = createHits(self.counts)
+            println(self.counts)
+            if self.counts == 9{
+                firstBody.velocity = CGVectorMake(0.0, 0.0)
+                firstBody.node?.runAction(SKAction.moveTo(respawnPos, duration: 2.0))
+                delay(3.0) {
+                    firstBody.velocity = CGVectorMake(0.0, 0.0)
+                    firstBody.applyImpulse(CGVectorMake(-0.8, 0.8))
+                }
+            }
+            
+            if self.counts > 19 {
+                firstBody.velocity = CGVectorMake(0.0, 0.0)
+                firstBody.node?.runAction(SKAction.moveTo(respawnPos, duration: 2.0))
+                delay(3.0) {
+                    firstBody.velocity = CGVectorMake(0.0, 0.0)
+                    firstBody.applyImpulse(CGVectorMake(-1.1, 1.1))
+                }
+            }
+            
+        } else if firstBody.categoryBitMask == ballCategory && secondBody.categoryBitMask == paddleCategory2 {
+            self.counts += 1
+            hitsText.text = createHits(self.counts)
+            println(self.counts)
+            if self.counts > 9{
+                firstBody.velocity = CGVectorMake(0.0, 0.0)
+                firstBody.node?.runAction(SKAction.moveTo(respawnPos, duration: 2.0))
+                delay(3.0) {
+                    firstBody.velocity = CGVectorMake(0.0, 0.0)
+                    firstBody.applyImpulse(CGVectorMake(-0.8, 0.8))
+                }
+            }
+            if self.counts > 19 {
+                firstBody.velocity = CGVectorMake(0.0, 0.0)
+                firstBody.node?.runAction(SKAction.moveTo(respawnPos, duration: 2.0))
+                delay(3.0) {
+                    firstBody.velocity = CGVectorMake(0.0, 0.0)
+                    firstBody.applyImpulse(CGVectorMake(-1.1, 1.1))
+                }
+            }
         }
     }
     
@@ -301,6 +355,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate{
         return "\(player1)-\(player2)"
     }
     
+    func createHits(hits: Int)-> String{
+        return "hits: \(hits)"
+    }
+    
     func checkIfWon(score: Int)->Bool{
         if score == 21{
             return true
@@ -317,12 +375,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate{
             ),
             dispatch_get_main_queue(), closure)
     }
-    
-
-    
-   
-
-    
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder:aDecoder)
