@@ -16,6 +16,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate{
     var fingerIsOnPaddle2 = false
     var scores: [Int] = [0,0]
     var updates = 0
+    let timeBeforeSpeed = NSTimeInterval(10)
     
     let ballCategoryName = "ball"
     let paddleCategoryName1 = "paddle1"
@@ -37,6 +38,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate{
         
         self.physicsWorld.contactDelegate = self
         
+        
+        
         //sound
         let bgMusicURL = NSBundle.mainBundle().URLForResource("Super Bell Hill (SM 3D World) - Super Smash Bros. Wii U", withExtension: "mp3")
         backgroundMusicPlayer = AVAudioPlayer(contentsOfURL: bgMusicURL, error: nil)
@@ -57,7 +60,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate{
         
         //---------------scoretext-----------------
         
-        self.scoreText.text = "0-0"
+        self.scoreText.text = "0 - 0"
         self.scoreText.fontSize = 30
         self.scoreText.position = CGPointMake(self.frame.size.width - self.frame.size.width/8, self.frame.size.height - self.frame.size.height/8)
         self.addChild(scoreText)
@@ -117,12 +120,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate{
         
         top.physicsBody?.contactTestBitMask = ballCategory
         bottom.physicsBody?.contactTestBitMask = ballCategory
-
         
-        
-        //--------MOVING PADDLE AROUND-------------
     }
-    
+        //--------MOVING PADDLE AROUND-------------
     
     
     override func touchesBegan(touches: NSSet, withEvent event: UIEvent) {
@@ -133,10 +133,12 @@ class GameScene: SKScene, SKPhysicsContactDelegate{
         if body?.node?.name == paddleCategoryName1{
             println("Paddle1 touched")
             fingerIsOnPaddle1 = true
-        } else if body?.node?.name == paddleCategoryName2{
+        
+        }/* else if body?.node?.name == paddleCategoryName2{
             println("Paddle2 touched")
             fingerIsOnPaddle2 = true
         }
+        */
     }
     
     override func touchesMoved(touches: NSSet, withEvent event: UIEvent) {
@@ -176,6 +178,12 @@ class GameScene: SKScene, SKPhysicsContactDelegate{
         fingerIsOnPaddle2 = false
     }
     
+    
+    override func update(currentTime: NSTimeInterval) {
+        let paddle = self.childNodeWithName(paddleCategoryName2) as SKSpriteNode
+        runPaddleAgent(paddle)
+    }
+    
     //----------CONTACT---------------
     
     func didBeginContact(contact: SKPhysicsContact) {
@@ -183,6 +191,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate{
         let update = 1
         var firstBody = SKPhysicsBody()
         var secondBody = SKPhysicsBody()
+
         
         if contact.bodyA.categoryBitMask < contact.bodyB.categoryBitMask {
             firstBody = contact.bodyA
@@ -208,6 +217,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate{
                     delay(2.0) {
                         firstBody.velocity = CGVectorMake(0.0, 0.0)
                         firstBody.applyImpulse(CGVectorMake(-0.5, 0.5))
+                        println(firstBody.velocity.dx)
+                        println(firstBody.velocity.dy)
                     }
                 }
                 
@@ -241,8 +252,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate{
                     firstBody.node?.runAction(SKAction.moveTo(respawnPos, duration: 0.0))
                     delay(2.0) {
                         firstBody.velocity = CGVectorMake(0.0, 0.0)
-                        firstBody.applyImpulse(CGVectorMake(0.5, -0.5))
+                        firstBody.applyImpulse(CGVectorMake(-0.5, 0.5))
                     }
+                    
                 }
                 
                     
@@ -259,8 +271,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate{
                     
                     delay(2.0) {
                         firstBody.velocity = CGVectorMake(0.0, 0.0)
-                        firstBody.applyImpulse(CGVectorMake(0.5, -0.5))
+                        firstBody.applyImpulse(CGVectorMake(-0.5, 0.5))
                     }
+                    
                 }
             }
             
@@ -269,6 +282,19 @@ class GameScene: SKScene, SKPhysicsContactDelegate{
     
     
     //-----------HELPER FUNCTIONS---------
+    
+    func runPaddleAgent(paddle: SKSpriteNode){
+        if paddle.position.x == CGRectGetMidX(self.frame) {
+            paddle.runAction(SKAction.moveToX(self.frame.size.width - paddle.size.width/2, duration: 0.4))
+        } else if paddle.position.x == self.frame.size.width - paddle.size.width/2 {
+            paddle.runAction(SKAction.moveToX(paddle.size.width/2, duration: 0.8))
+        } else if paddle.position.x == paddle.size.width/2 {
+            paddle.runAction(SKAction.moveToX(self.frame.size.width - paddle.size.width/2, duration: 0.8))
+        }
+        
+    }
+    
+    
     func createScore(score: [Int])-> String{
         var player1 = score[0]
         var player2 = score[1]
@@ -276,15 +302,12 @@ class GameScene: SKScene, SKPhysicsContactDelegate{
     }
     
     func checkIfWon(score: Int)->Bool{
-        if score == 2{
+        if score == 21{
             return true
         }
         return false
     }
     
-    func Winner(score: [Int]){
-        
-    }
     
     func delay(delay:Double, closure:()->()) {
         dispatch_after(
@@ -294,6 +317,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate{
             ),
             dispatch_get_main_queue(), closure)
     }
+    
+
+    
+   
 
     
     
